@@ -10,5 +10,4 @@ for i in range(len(data)):
 for j in range(len(ball)-1):
     for k in range(j+1, len(ball)):
         result += ball[j] * ball[k]
-
 print(result)
