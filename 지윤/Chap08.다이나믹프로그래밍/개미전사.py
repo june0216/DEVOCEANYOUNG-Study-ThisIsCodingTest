@@ -1,9 +1,11 @@
+# 계단 문제와 비슷 -> 한 칸만 띄어서 약탈하는 게 최대임 약탈 할 것인가 약탈 안할 것인가에 대한 테이블을 만들고 최대값을 선택
 n = int(input())
 array = list(map(int, input().split()))
 
-d = [0] * 100
-d[0] = array[0]
-d[1] = max(array[0], array[1])
+dp = [0] * (n+1) #하나씩 집을 들리면서 털 것인가 아닌가에 따른 비용 저장용
+
+dp[0] = array[0]  #처음에는 일단 턴다고 가정
+dp[1] = max(array[0], array[1]) #처음과 지금을 비교하여 지금이 더 크면 그거로 저장한다. 아니면 털지 않는다(앞의 값 그대로 저장)
 for i in range(2, n):
-    d[i] = max(d[i-1], d[i-2] + array[i])
-print(d[n-1])
+    dp[i] += max(dp[i-2] + array[i], dp[i-1]) #2가지만 비교하면 된다. i-1과 i-2의 값을 비교하여 큰 거 선택하면 된다.
+print(dp[n-1])
